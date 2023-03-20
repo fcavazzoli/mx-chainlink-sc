@@ -25,3 +25,5 @@ logs
 .env.dev
 .env.testing
 vendor
+
+elrond-adapter
