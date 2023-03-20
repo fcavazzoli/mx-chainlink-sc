@@ -327,9 +327,9 @@ pub trait PriceAggregator:
         result
     }
 
-    fn require_not_paused(&self) {
-        require!(self.not_paused(), PAUSED_ERROR_MSG);
-    }
+    // fn require_not_paused(&self) {
+    //     require!(self.not_paused(), PAUSED_ERROR_MSG);
+    // }
 
     #[storage_mapper("was_contract_deployed")]
     fn was_contract_deployed(&self) -> SingleValueMapper<bool>;

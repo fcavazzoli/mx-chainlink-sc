@@ -2,7 +2,7 @@
     GasPrice = 1_000_000_000
     ProxyUrl = "https://devnet-gateway.elrond.com"
     ChainID = "D"
-    PemPath = "./config/owner.pem"
+    PemPath = "./config/wallets/devnet/owner.pem"
 
 [GasConfig]
     BatchTxGasLimit = 215_000_000
