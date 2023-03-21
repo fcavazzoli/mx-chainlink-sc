@@ -40,7 +40,7 @@ func NewAdapter(config config.GeneralConfig) (*adapter, error) {
 }
 
 func (a *adapter) HandlePriceFeed(data models.RequestData) (string, error) {
-	price, err := a.exchangeAggregator.GetPrice(data.Value, data.Result)
+	price, err := a.exchangeAggregator.GetPrice(data.Value[0], data.Result)
 	if err != nil {
 		return "", err
 	}
@@ -57,7 +57,8 @@ func (a *adapter) HandleWriteFeed(data models.RequestData) (string, error) {
 		scAddress = a.config.Contract.Address
 	}
 
-	argsHex, err := prepareWriteRequestArgsHex(data.Value, data.RoundID)
+	argsHex, err := prepareArrayArgsHex(data.Value, data.RoundID)
+
 	if err != nil {
 		log.Error("write job: failed to prepare args hex", "err", err.Error())
 		return "", err
@@ -174,6 +175,41 @@ func (a *adapter) prepareInputDataForPairsBatches(pairs []models.FeedPair, endpo
 	}
 
 	return inputData, nil
+}
+
+func isNumeric(str string) bool {
+	for _, char := range str {
+		if char < '0' || char > '9' {
+			return false
+		}
+	}
+	return true
+}
+
+func prepareArrayArgsHex(values []string, roundID string) (string, error) {
+	//print values
+	fmt.Println("values: ", values)
+
+	args := ""
+
+	for _, value := range values {
+		// print value
+		fmt.Println("value: ", value)
+		if isNumeric(value) {
+			parsedValue, ok := big.NewInt(0).SetString(value, 10)
+			if !ok {
+				return "", errors.New("failure parsing request value")
+			}
+			args += "@" + hex.EncodeToString(parsedValue.Bytes())
+		} else {
+			args += "@" + hex.EncodeToString([]byte(value))
+		}
+	}
+
+	// remove first @
+	args = args[1:]
+
+	return args, nil
 }
 
 func prepareJobResultArgsHex(base, quote, price string) (string, error) {

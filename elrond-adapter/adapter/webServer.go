@@ -29,6 +29,7 @@ func (ws *webServer) Run(port string) *http.Server {
 	ws.router.POST("/price", ws.processPriceRequest)
 	ws.router.POST("/price-job", ws.processJobRunRequest)
 	ws.router.POST("/ethgas/denominate", ws.processGasRequest)
+	ws.router.GET("/health", ws.processHealthRequest)
 
 	server := &http.Server{
 		Addr:    port,
@@ -39,7 +40,12 @@ func (ws *webServer) Run(port string) *http.Server {
 			panic(err)
 		}
 	}()
+	println("Server started on port", port)
 	return server
+}
+
+func (ws *webServer) processHealthRequest(c *gin.Context) {
+	okResponse(c, http.StatusOK, "Health OK")
 }
 
 func (ws *webServer) processWriteRequest(c *gin.Context) {

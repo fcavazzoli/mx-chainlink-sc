@@ -4,7 +4,7 @@ COPY . /app
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y golang-go ca-certificates gcc
+RUN apt-get update && apt-get install -y golang-go ca-certificates gcc curl
 
 RUN go install
 

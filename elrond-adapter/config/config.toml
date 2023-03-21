@@ -2,7 +2,7 @@
     GasPrice = 1_000_000_000
     ProxyUrl = "https://devnet-gateway.elrond.com"
     ChainID = "D"
-    PemPath = "./config/wallets/devnet/owner.pem"
+    PemPath = "./config/wallets/devnet/user2.pem"
 
 [GasConfig]
     BatchTxGasLimit = 215_000_000
@@ -13,7 +13,7 @@
 
 [Contract]
     Endpoint = "submit"
-    Address = "erd1qqqqqqqqqqqqqpgq2j35zktgvhazpvzrr9m8649gnqz53uydu00sflu9rz"
+    Address = "erd1qqqqqqqqqqqqqpgq08qygttt5xx24vp22rxwsee7ssntyw2evg2sxfffmg"
 
 [PriceFeedBatch]
     Endpoint = "submitBatch"

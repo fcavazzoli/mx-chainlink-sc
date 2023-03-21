@@ -13,11 +13,11 @@ type JobResponse struct {
 }
 
 type RequestData struct {
-	Value     string `json:"value"`
-	Result    string `json:"result"`
-	ScAddress string `json:"sc_address"`
-	Function  string `json:"function"`
-	RoundID   string `json:"round_id"`
+	Value     []string `json:"value"`
+	Result    string   `json:"result"`
+	ScAddress string   `json:"sc_address"`
+	Function  string   `json:"function"`
+	RoundID   string   `json:"round_id"`
 }
 
 type FeedPair struct {
